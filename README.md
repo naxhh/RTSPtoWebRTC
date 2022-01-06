@@ -6,6 +6,10 @@ full native! not use ffmpeg or gstreamer
 
 if you need RTSPtoWSMP4f use https://github.com/deepch/RTSPtoWSMP4f
 
+### FORK
+
+This fork only adds a new `/stream/player/all` endpoint to see all streams at once
+
 
 ![RTSPtoWebRTC image](doc/demo4.png)
 
