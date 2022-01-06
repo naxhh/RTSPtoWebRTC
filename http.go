@@ -27,6 +27,7 @@ func serveHTTP() {
 	if _, err := os.Stat("./web"); !os.IsNotExist(err) {
 		router.LoadHTMLGlob("web/templates/*")
 		router.GET("/", HTTPAPIServerIndex)
+		router.GET("/stream/player/all", HTTPAPIServerStreamPlayerAll)
 		router.GET("/stream/player/:uuid", HTTPAPIServerStreamPlayer)
 	}
 	router.POST("/stream/receiver/:uuid", HTTPAPIServerStreamWebRTC)
@@ -65,6 +66,16 @@ func HTTPAPIServerStreamPlayer(c *gin.Context) {
 		"suuidMap": all,
 		"version":  time.Now().String(),
 	})
+}
+
+func HTTPAPIServerStreamPlayerAll(c *gin.Context) {
+	_, all := Config.list()
+	sort.Strings(all)
+	c.HTML(http.StatusOK, "player_all.tmpl", gin.H{
+		"port":     Config.Server.HTTPPort,
+		"suuidMap": all,
+		"version":  time.Now().String(),
+	})	
 }
 
 //HTTPAPIServerStreamCodec stream codec

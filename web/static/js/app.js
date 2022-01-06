@@ -39,7 +39,7 @@ function getCodecInfo() {
     try {
       data = JSON.parse(data);
     } catch (e) {
-      console.log(e);
+      console.warn(e);
     } finally {
       $.each(data,function(index,value){
         pc.addTransceiver(value.Type, {
